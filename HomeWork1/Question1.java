@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Question1 {
     
-    public boolean isAnOperation(char c){
+    public static boolean isAnOperation(char c){
         return c == '*' || c == '+' || c == '-' || c == '/';
     }
 
-    public void solveOperation(String operationString){
+    public static void solveOperation(String operationString){
         Stack <String> operands = new Stack<String>();
         Stack <Character> operations = new Stack<Character>();
         
