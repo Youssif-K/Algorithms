@@ -1,3 +1,5 @@
+package three_sum_problem;
+
 /******************************************************************************
  *  Compilation:  javac ThreeSum.java
  *  Execution:    java ThreeSum input.txt
@@ -45,34 +47,31 @@ public class ThreeSum {
         }
         return cnt;
     }
+    public static int optimizedCounting(int[] a){
+        int N = a.length;
+        int cnt = 0;
 
-    // public static void main(String[] args) throws Exception {
-    //     String loadFile = args[0];
-    //     String url;
-    //     if(loadFile.equals("1")){
-    //         url = "https://algs4.cs.princeton.edu/14analysis/1Kints.txt";
-    //     }else if(loadFile.equals("2")){
-    //         url = "https://algs4.cs.princeton.edu/14analysis/2Kints.txt";
-    //     }else if(loadFile.equals("4")){
-    //         url = "https://algs4.cs.princeton.edu/14analysis/4Kints.txt";
-    //     }else if(loadFile.equals("8")){
-    //         url = "https://algs4.cs.princeton.edu/14analysis/8Kints.txt";
-    //     }else if(loadFile.equals("16")){
-    //         url = "https://algs4.cs.princeton.edu/14analysis/16Kints.txt";
-    //     }else if(loadFile.equals("32")){
-    //         url = "https://algs4.cs.princeton.edu/14analysis/32Kints.txt";
-    //     }else{
-    //         url = "https://algs4.cs.princeton.edu/14analysis/1Mints.txt";
-    //     }
+        for(int i = 0; i < N; i++){
+            for(int j = i+1; j < N; j++){
+                int missingNumber = -1*(a[i] + a[j]);
+                int min = j+1;
+                int middle = (j + N -1)/2;
+                int max = N-1;
+                while(max >= min){
+                    if(missingNumber == a[middle]){
+                        cnt++;
+                        break;
+                    }else if(missingNumber > a[middle]){
+                        min = middle + 1;
+                        middle = (max+min)/2;
+                    }else if(missingNumber < a[middle]){
+                        max = middle - 1;
+                        middle = (max+min)/2;
+                    }
+                }
+            }
+        }
 
-    //     //url = "https://algs4.cs.princeton.edu/14analysis/2Kints.txt";
-    //     URL accessURL = new URI(url).toURL();
-    //     URLConnection connection = accessURL.openConnection();
-    //     BufferedReader buffer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        
-    //     Stopwatch watch = new Stopwatch();
-    //     System.out.println("Number of triples in the file: "+ count(buffer.lines().mapToInt(num -> Integer.parseInt(num.replace(" ", ""))).toArray()));
-    //     System.out.println("Elapsed time: "+watch.elapsedTime());
-    //     buffer.close();
-    // }
+        return cnt;
+    }
 }
