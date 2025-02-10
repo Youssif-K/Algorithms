@@ -44,4 +44,13 @@ public class Queue <T> {
         this.first = null;
         this.last = null;
     }
+
+    public Node<T> getFirst() {
+        return first;
+    }
+
+    public Node<T> getLast() {
+        return last;
+    }
+    
 }
