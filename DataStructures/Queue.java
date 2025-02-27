@@ -1,10 +1,16 @@
 package DataStructures;
+
+import java.util.Iterator;
+
 /*
  * This is the implementation of the Queue with a one way linked list
  * Enqueuing an element is of time complexity O(1)
  * Dequeuing an element is of time complexity O(1) (because we point to the last element)
+ * Searching for elements is of time complexity O(N)
+ * Enqueuing from last pointer
+ * Dequeuing from first pointer
  */
-public class Queue <T> {
+public class Queue <T> implements Iterable<T>{
     private Node <T> first;
     private Node <T> last;
 
@@ -53,4 +59,24 @@ public class Queue <T> {
         return last;
     }
     
+    public Iterator<T> iterator(){
+        return new QueueIterator();
+    }
+
+    private class QueueIterator implements Iterator<T>{
+        private Node<T> current;
+        public QueueIterator(){
+            this.current = first;
+        }
+        @Override
+        public boolean hasNext(){
+            return this.current != null;
+        }
+        @Override
+        public T next(){
+            T item = this.current.getItem();
+            this.current = this.current.getNext();
+            return item;
+        }
+    }
 }
