@@ -1,10 +1,12 @@
 package DataStructures;
+import java.util.Iterator;
+
 /*
  * This is the implementation of the stack with a one way linked list
  * The poping and pushing actions are of complexity O(1)
  * Searching for elements is of time complexity O(N)
  */
-public class Stack<T> {
+public class Stack<T> implements Iterable<T> {
     private Node<T> first;
 
     public Stack() {
@@ -41,4 +43,27 @@ public class Stack<T> {
     public void setFirstNode(Node<T> node){
         this.first = node;
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new StackIterator();
+    }
+
+    private class StackIterator implements Iterator<T>{
+        private Node<T> current;
+        public StackIterator(){
+            this.current = first;
+        }
+        @Override
+        public boolean hasNext(){
+            return this.current != null;
+        }
+        @Override
+        public T next(){
+            T item = this.current.getItem();
+            this.current = this.current.getNext();
+            return item;
+        }
+    }
 }
+
